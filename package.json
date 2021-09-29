@@ -1,0 +1,15 @@
+{
+  "name": "typescript-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "TodoApp.template.js",
+  "scripts": {
+    "ts": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.4.3"
+  }
+}
