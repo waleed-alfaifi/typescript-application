@@ -9,7 +9,17 @@ enum TodoState {
   Complete = 2,
 }
 
-class TodoService {
+// Remember, interfaces are like the public face for other modules; so they should only include public members
+interface ITodoService {
+  add(todo: Todo): Todo;
+  add(todo: string): Todo;
+  clearCompleted(): void;
+  getAll(): Todo[];
+  getById(todoId: number): Todo;
+  toggle(todoId: number): void;
+}
+
+class TodoService implements ITodoService {
   private static _lastId = 0;
   private todos: Todo[] = [];
 
