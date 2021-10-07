@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "target": "ES5",
-        "watch": true,
-    }
+  "compilerOptions": {
+    "target": "ES5",
+    "watch": true
+  }
 }

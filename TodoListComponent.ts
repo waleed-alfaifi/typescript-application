@@ -1,10 +1,9 @@
 interface ITodoListComponent {
-  // temporary for now
   render(todos: Todo[]): void;
 }
 
 class TodoListComponent implements ITodoListComponent {
-  private $el: Element;
+  private $el: JQuery;
   constructor(private element: Element) {
     this.$el = $(element);
   }
