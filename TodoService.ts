@@ -1,14 +1,3 @@
-interface Todo {
-  id: number;
-  name: string;
-  state: TodoState;
-}
-
-enum TodoState {
-  Active = 1,
-  Complete = 2,
-}
-
 // Remember, interfaces are like the public face for other modules; so they should only include public members
 interface ITodoService {
   add(todo: Todo): Todo;
