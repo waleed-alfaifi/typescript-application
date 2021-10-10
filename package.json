@@ -14,5 +14,6 @@
   "devDependencies": {
     "typescript": "^4.4.3",
     "typings": "^2.1.1"
-  }
+  },
+  "dependencies": {}
 }

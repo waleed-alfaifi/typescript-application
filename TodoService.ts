@@ -1,5 +1,7 @@
+import { Todo, TodoState } from "./Model.js";
+
 // Remember, interfaces are like the public face for other modules; so they should only include public members
-interface ITodoService {
+export interface ITodoService {
   add(todo: Todo): Todo;
   add(todo: string): Todo;
   clearCompleted(): void;
@@ -80,3 +82,5 @@ class TodoService implements ITodoService {
     return this.todos.filter((todo) => todo.id === todoId)[0];
   }
 }
+
+export default TodoService;

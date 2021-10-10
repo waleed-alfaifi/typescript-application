@@ -1,3 +1,6 @@
+import TodoService, { ITodoService } from "./TodoService.js";
+import TodoListComponent, { ITodoListComponent } from "./TodoListComponent.js";
+
 class TodoApp {
   todoService: ITodoService;
   todoList: ITodoListComponent;
@@ -49,3 +52,5 @@ class TodoApp {
     this.renderTodos();
   }
 }
+
+export default TodoApp;

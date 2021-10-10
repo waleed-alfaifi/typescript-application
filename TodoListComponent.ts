@@ -1,4 +1,7 @@
-interface ITodoListComponent {
+import { Todo, TodoState } from "./Model.js";
+import "//code.jquery.com/jquery-1.12.1.min.js";
+
+export interface ITodoListComponent {
   render(todos: Todo[]): void;
 }
 
@@ -9,7 +12,6 @@ class TodoListComponent implements ITodoListComponent {
   }
 
   render(todos: Todo[]) {
-    console.log(`todos`, todos);
     this.$el.html("");
 
     if (todos.length === 0) {
@@ -58,3 +60,5 @@ class TodoListComponent implements ITodoListComponent {
     });
   }
 }
+
+export default TodoListComponent;
