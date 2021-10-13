@@ -1,6 +1,6 @@
 System.register(["./Model.js"], function (exports_1, context_1) {
     "use strict";
-    var Model_js_1, TodoService;
+    var Model_js_1, TodoService, originalMethod;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
@@ -71,6 +71,18 @@ System.register(["./Model.js"], function (exports_1, context_1) {
                 TodoService._lastId = 0;
                 return TodoService;
             }());
+            // Create a decorator with pure JavaScript
+            originalMethod = TodoService.prototype.add;
+            TodoService.prototype.add = function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                console.log("add(" + JSON.stringify(args) + ")");
+                var returnValue = originalMethod.apply(this, args);
+                console.log("add(" + JSON.stringify(args) + ") => " + JSON.stringify(returnValue, null, 4));
+                return returnValue;
+            };
             exports_1("default", TodoService);
         }
     };

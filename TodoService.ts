@@ -83,4 +83,16 @@ class TodoService implements ITodoService {
   }
 }
 
+// Create a decorator with pure JavaScript
+const originalMethod = TodoService.prototype.add;
+
+TodoService.prototype.add = function (...args: any) {
+  console.log(`add(${JSON.stringify(args)})`);
+  const returnValue = originalMethod.apply(this, args);
+  console.log(
+    `add(${JSON.stringify(args)}) => ${JSON.stringify(returnValue, null, 4)}`
+  );
+  return returnValue;
+};
+
 export default TodoService;
