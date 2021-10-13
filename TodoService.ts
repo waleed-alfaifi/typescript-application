@@ -33,12 +33,15 @@ class TodoService implements ITodoService {
   // Accepts a todo name or todo object
   add(input: Todo): Todo;
   add(input: string): Todo;
+  @log
   add<T extends Todo | string>(input: T): Todo {
     const todo: Todo = {
       id: TodoService.generateTodoId(),
       name: null,
       state: TodoState.Active,
     };
+
+    let x: ClassDecorator;
 
     if (typeof input === "string") {
       todo.name = input;
@@ -83,16 +86,38 @@ class TodoService implements ITodoService {
   }
 }
 
-// Create a decorator with pure JavaScript
-const originalMethod = TodoService.prototype.add;
+// Create a reusable decorator with TypeScript
+function log(
+  target: Object,
+  methodName: string,
+  descriptor: TypedPropertyDescriptor<Function>
+) {
+  const originalMethod = descriptor.value;
+  const logItForMePlease = function (
+    methodName: string,
+    body: any,
+    withReturn?: any
+  ) {
+    if (withReturn) {
+      console.log(
+        `${methodName}(${JSON.stringify(body)}) => ${JSON.stringify(
+          withReturn,
+          null,
+          4
+        )}`
+      );
+    } else {
+      console.log(`${methodName}(${JSON.stringify(body)})`);
+    }
+  };
 
-TodoService.prototype.add = function (...args: any) {
-  console.log(`add(${JSON.stringify(args)})`);
-  const returnValue = originalMethod.apply(this, args);
-  console.log(
-    `add(${JSON.stringify(args)}) => ${JSON.stringify(returnValue, null, 4)}`
-  );
-  return returnValue;
-};
+  // Out new method (i.e. decorator) that calls the original method but also adds some functionality to it
+  descriptor.value = function (...args: any) {
+    logItForMePlease(methodName, args);
+    const returnValue = originalMethod.apply(this, args);
+    logItForMePlease(methodName, args, returnValue);
+    return returnValue;
+  };
+}
 
 export default TodoService;

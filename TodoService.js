@@ -1,7 +1,36 @@
 System.register(["./Model.js"], function (exports_1, context_1) {
     "use strict";
-    var Model_js_1, TodoService, originalMethod;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var Model_js_1, TodoService;
     var __moduleName = context_1 && context_1.id;
+    // Create a reusable decorator with TypeScript
+    function log(target, methodName, descriptor) {
+        var originalMethod = descriptor.value;
+        var logItForMePlease = function (methodName, body, withReturn) {
+            if (withReturn) {
+                console.log(methodName + "(" + JSON.stringify(body) + ") => " + JSON.stringify(withReturn, null, 4));
+            }
+            else {
+                console.log(methodName + "(" + JSON.stringify(body) + ")");
+            }
+        };
+        // Out new method (i.e. decorator) that calls the original method but also adds some functionality to it
+        descriptor.value = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            logItForMePlease(methodName, args);
+            var returnValue = originalMethod.apply(this, args);
+            logItForMePlease(methodName, args, returnValue);
+            return returnValue;
+        };
+    }
     return {
         setters: [
             function (Model_js_1_1) {
@@ -31,6 +60,7 @@ System.register(["./Model.js"], function (exports_1, context_1) {
                         name: null,
                         state: Model_js_1.TodoState.Active,
                     };
+                    var x;
                     if (typeof input === "string") {
                         todo.name = input;
                     }
@@ -69,20 +99,11 @@ System.register(["./Model.js"], function (exports_1, context_1) {
                     return this.todos.filter(function (todo) { return todo.id === todoId; })[0];
                 };
                 TodoService._lastId = 0;
+                __decorate([
+                    log
+                ], TodoService.prototype, "add", null);
                 return TodoService;
             }());
-            // Create a decorator with pure JavaScript
-            originalMethod = TodoService.prototype.add;
-            TodoService.prototype.add = function () {
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                console.log("add(" + JSON.stringify(args) + ")");
-                var returnValue = originalMethod.apply(this, args);
-                console.log("add(" + JSON.stringify(args) + ") => " + JSON.stringify(returnValue, null, 4));
-                return returnValue;
-            };
             exports_1("default", TodoService);
         }
     };

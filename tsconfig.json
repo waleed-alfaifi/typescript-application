@@ -3,6 +3,7 @@
     "target": "ES5",
     "watch": true,
     "module": "system",
-    "sourceMap": true
+    "sourceMap": true,
+    "experimentalDecorators": true
   }
 }
