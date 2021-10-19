@@ -19,7 +19,7 @@ System.register(["./Model.js"], function (exports_1, context_1) {
                 console.log(methodName + "(" + JSON.stringify(body) + ")");
             }
         };
-        // Out new method (i.e. decorator) that calls the original method but also adds some functionality to it
+        // Our new method (i.e. decorator) that calls the original method but also adds some functionality to it
         descriptor.value = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {

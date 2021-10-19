@@ -111,7 +111,7 @@ function log(
     }
   };
 
-  // Out new method (i.e. decorator) that calls the original method but also adds some functionality to it
+  // Our new method (i.e. decorator) that calls the original method but also adds some functionality to it
   descriptor.value = function (...args: any) {
     logItForMePlease(methodName, args);
     const returnValue = originalMethod.apply(this, args);
